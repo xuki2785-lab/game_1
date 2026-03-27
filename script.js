@@ -269,34 +269,54 @@ function initGame() {
     // 打乱按钮颜色顺序
     buttonColors.sort(() => Math.random() - 0.5);
     
+    // 2%概率生成无正确答案的题目
+    const hasCorrectAnswer = Math.random() > 0.02;
+    
     // 生成题目文字和颜色
     let randomWord;
     if (gameSettings.difficulty === 'hard') {
         // 困难模式：使用颜色词作为文字，但文字和颜色不匹配
         // 获取按钮颜色名称
-        const buttonColorNames = buttonColors.map(color => getColorName(color));
+        let buttonColorNames = buttonColors.map(color => getColorName(color));
         
-        // 先选择文本颜色（正确答案），确保它在按钮中
-        correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
-        
-        // 确保文字和颜色不相同：选择一个与颜色不同的颜色词
-        let availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
-        // 如果过滤后没有可用词汇，则重新生成按钮直到有可用词汇
-        while (availableWords.length === 0) {
-            // 重新生成一组按钮
-            buttonColors.length = 0;
-            while (buttonColors.length < buttonCount) {
-                const randomColor = currentColorSet.colors[Math.floor(Math.random() * currentColorSet.colors.length)];
-                if (!buttonColors.includes(randomColor)) {
-                    buttonColors.push(randomColor);
-                }
-            }
-            buttonColors.sort(() => Math.random() - 0.5);
-            const newButtonColorNames = buttonColors.map(color => getColorName(color));
+        if (hasCorrectAnswer) {
+            // 有正确答案：从按钮颜色中选择
             correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
-            availableWords = newButtonColorNames.filter(name => getColorName(correctColor) !== name);
+            
+            // 确保文字和颜色不相同：选择一个与颜色不同的颜色词
+            let availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
+            // 如果过滤后没有可用词汇，则重新生成按钮直到有可用词汇
+            while (availableWords.length === 0) {
+                // 重新生成一组按钮
+                buttonColors.length = 0;
+                while (buttonColors.length < buttonCount) {
+                    const randomColor = currentColorSet.colors[Math.floor(Math.random() * currentColorSet.colors.length)];
+                    if (!buttonColors.includes(randomColor)) {
+                        buttonColors.push(randomColor);
+                    }
+                }
+                buttonColors.sort(() => Math.random() - 0.5);
+                buttonColorNames = buttonColors.map(color => getColorName(color));
+                correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+                availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
+            }
+            randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
+        } else {
+            // 无正确答案：从所有颜色词中选择一个，确保不在按钮中
+            const allColorNames = Object.keys(colorWords);
+            let availableWords = allColorNames.filter(name => !buttonColorNames.includes(name));
+            if (availableWords.length === 0) {
+                availableWords = allColorNames;
+            }
+            randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
+            // 选择一个不在按钮中的颜色
+            const allColors = Object.values(colorWords);
+            let availableColors = allColors.filter(color => !buttonColors.includes(color));
+            if (availableColors.length === 0) {
+                availableColors = allColors;
+            }
+            correctColor = availableColors[Math.floor(Math.random() * availableColors.length)];
         }
-        randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
     } else {
         // 普通模式：随机选择文本（普通词汇或中性词）
         // 20%概率出现中性词
@@ -314,8 +334,18 @@ function initGame() {
             wordElement.style.fontWeight = 'normal';
         }
         
-        // 普通模式：从按钮颜色中选择文本颜色，确保正确答案在按钮中
-        correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+        if (hasCorrectAnswer) {
+            // 有正确答案：从按钮颜色中选择
+            correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+        } else {
+            // 无正确答案：从所有颜色中选择一个不在按钮中的颜色
+            const allColors = Object.values(colorWords);
+            let availableColors = allColors.filter(color => !buttonColors.includes(color));
+            if (availableColors.length === 0) {
+                availableColors = allColors;
+            }
+            correctColor = availableColors[Math.floor(Math.random() * availableColors.length)];
+        }
     }
     
     // 设置文本和颜色
@@ -574,33 +604,63 @@ function checkAnswer(selectedColor) {
         }, 300);
     } else {
         // 错误答案
-        // 正确答案是文字显示的颜色
-        const correctAnswerText = getColorName(correctColor);
+        // 检查是否是无正确答案的题目
+        const isNoCorrectAnswer = !buttonColors.includes(correctColor);
         
-        feedbackElement.textContent = `错误！正确答案是：${correctAnswerText}`;
-        feedbackElement.className = 'feedback incorrect';
-        // 播放错误答案音效
-        playErrorSound();
-        // 如果开启了错误惩罚，减少分数
-        if (gameSettings.errorPenalty) {
+        if (isNoCorrectAnswer) {
+            // 无正确答案的题目：用户点击任何按钮都正确
+            feedbackElement.textContent = '正确！（无正确答案）';
+            feedbackElement.className = 'feedback correct';
+            // 播放正确答案音效
+            playCorrectSound();
+            // 增加分数
             if (gameSettings.difficulty === 'hard') {
-                // 困难模式-10分
-                gameSettings.score = Math.max(0, gameSettings.score - 10);
+                // 困难模式+15分
+                gameSettings.score += 15;
             } else if (gameSettings.difficulty === 'medium') {
-                // 中等模式-5分
-                gameSettings.score = Math.max(0, gameSettings.score - 5);
+                // 中等模式+10分
+                gameSettings.score += 10;
             } else {
-                // 简单模式-1分
-                gameSettings.score = Math.max(0, gameSettings.score - 1);
+                // 简单模式+1分
+                gameSettings.score++;
             }
             // 更新得分显示
             scoreElement.textContent = gameSettings.score;
+            // 屏幕边缘闪烁（正确闪淡绿）
+            document.body.style.boxShadow = 'inset 0 0 50px rgba(76, 175, 80, 0.5)';
+            setTimeout(() => {
+                document.body.style.boxShadow = 'none';
+            }, 300);
+        } else {
+            // 有正确答案但答错了
+            // 正确答案是文字显示的颜色
+            const correctAnswerText = getColorName(correctColor);
+            
+            feedbackElement.textContent = `错误！正确答案是：${correctAnswerText}`;
+            feedbackElement.className = 'feedback incorrect';
+            // 播放错误答案音效
+            playErrorSound();
+            // 如果开启了错误惩罚，减少分数
+            if (gameSettings.errorPenalty) {
+                if (gameSettings.difficulty === 'hard') {
+                    // 困难模式-10分
+                    gameSettings.score = Math.max(0, gameSettings.score - 10);
+                } else if (gameSettings.difficulty === 'medium') {
+                    // 中等模式-5分
+                    gameSettings.score = Math.max(0, gameSettings.score - 5);
+                } else {
+                    // 简单模式-1分
+                    gameSettings.score = Math.max(0, gameSettings.score - 1);
+                }
+                // 更新得分显示
+                scoreElement.textContent = gameSettings.score;
+            }
+            // 屏幕边缘闪烁（错误闪淡橙）
+            document.body.style.boxShadow = 'inset 0 0 50px rgba(255, 152, 0, 0.5)';
+            setTimeout(() => {
+                document.body.style.boxShadow = 'none';
+            }, 300);
         }
-        // 屏幕边缘闪烁（错误闪淡橙）
-        document.body.style.boxShadow = 'inset 0 0 50px rgba(255, 152, 0, 0.5)';
-        setTimeout(() => {
-            document.body.style.boxShadow = 'none';
-        }, 300);
     }
     
     // 增加当前题目数
