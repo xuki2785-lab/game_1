@@ -314,8 +314,8 @@ function initGame() {
             wordElement.style.fontWeight = 'normal';
         }
         
-        // 普通模式：随机选择一个颜色作为文本颜色
-        correctColor = currentColorSet.colors[Math.floor(Math.random() * currentColorSet.colors.length)];
+        // 普通模式：从按钮颜色中选择文本颜色，确保正确答案在按钮中
+        correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
     }
     
     // 设置文本和颜色
