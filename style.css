@@ -1,0 +1,373 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    background-color: #f5e6c1;
+    background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" fill="%23d9c7a4" fill-opacity="0.3" fill-rule="evenodd"/%3E%3C/svg%3E');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333333;
+}
+
+.game-container {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+}
+
+/* 鼓励语 */
+.encouragement {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 1rem;
+    color: #666666;
+}
+
+h1 {
+    color: #333333;
+    margin-bottom: 10px;
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666666;
+    margin-bottom: 30px;
+}
+
+/* 开始界面插画 */
+.start-screen img {
+    max-width: 300px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+/* 游戏信息卡片 */
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+/* 倒计时条 */
+.timer-container {
+    flex: 1;
+    margin-left: 30px;
+    height: 40px;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.timer-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #FFC107);
+    border-radius: 20px;
+    transition: width 1s linear;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* 倒计时小狗 */
+.timer-character {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 1s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    content: "🐶";
+}
+
+/* 小狗年龄变化动画 */
+.timer-bar[data-age="young"] .timer-character {
+    font-size: 20px;
+    content: "🐶";
+}
+
+.timer-bar[data-age="adult"] .timer-character {
+    font-size: 22px;
+    content: "🐶";
+}
+
+.timer-bar[data-age="old"] .timer-character {
+    font-size: 24px;
+    content: "🐶";
+}
+
+.word {
+    font-size: 7rem;
+    font-weight: bold;
+    margin: 50px 0;
+    min-height: 120px;
+}
+
+.feedback {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    min-height: 30px;
+}
+
+.feedback.correct {
+    color: #4CAF50;
+}
+
+.feedback.incorrect {
+    color: #F44336;
+}
+
+.buttons-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 规则提示 */
+.rule-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rule-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.rule-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+/* 双重任务计数器 */
+.dual-task-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 1rem;
+    color: #333333;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-btn {
+    padding: 30px;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    font-size: 2.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.color-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.color-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.start-screen {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.start-screen p {
+    font-size: 1.2rem;
+    color: #333333;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.start-btn {
+    padding: 18px 45px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+}
+
+.start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+}
+
+.start-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
+}
+
+.difficulty-screen {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.difficulty-screen h2 {
+    color: #333333;
+    margin-bottom: 30px;
+}
+
+.difficulty-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.difficulty-btn {
+    padding: 18px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333333;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+}
+
+.difficulty-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.difficulty-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 难度按钮颜色 */
+#easy-btn {
+    background-color: #E8F5E9;
+}
+
+#medium-btn {
+    background-color: #FFF3E0;
+}
+
+#hard-btn {
+    background-color: #F3E5F5;
+}
+
+#custom-btn {
+    background-color: #E3F2FD;
+}
+
+.custom-options {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.custom-options h3 {
+    color: #333333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.custom-setting {
+    margin-bottom: 15px;
+}
+
+.custom-setting label {
+    display: inline-block;
+    width: 200px;
+    font-size: 1rem;
+    color: #333333;
+}
+
+.custom-setting input,
+.custom-setting select {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100px;
+}
+
+.back-btn {
+    margin-top: 20px;
+    padding: 10px 30px;
+    font-size: 1rem;
+    color: #333333;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

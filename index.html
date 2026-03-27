@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>色彩干扰游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>色彩干扰游戏</h1>
+        <p class="subtitle">锻炼大脑，放松心情</p>
+        <div id="start-screen" class="start-screen">
+            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=温馨的家庭照片风格插画，老人与孙辈的剪影，柔和的光线，温暖的氛围&image_size=portrait_4_3" alt="家庭温馨插画">
+            <p>忽略文字的含义，只根据文字显示的颜色点击下方对应的颜色按钮。</p>
+            <button id="start-btn" class="start-btn">开始游戏</button>
+        </div>
+        <div id="difficulty-screen" class="difficulty-screen" style="display: none;">
+            <h2>选择难度</h2>
+            <div class="difficulty-options">
+                <button id="easy-btn" class="difficulty-btn">简单模式</button>
+                <button id="medium-btn" class="difficulty-btn">中等模式</button>
+                <button id="hard-btn" class="difficulty-btn">困难模式</button>
+                <button id="custom-btn" class="difficulty-btn">自定义模式</button>
+            </div>
+            <div id="custom-options" class="custom-options" style="display: none;">
+                <h3>自定义设置</h3>
+                <div class="custom-setting">
+                    <label for="countdown-time">倒计时时长（2-8秒）：</label>
+                    <input type="number" id="countdown-time" min="2" max="8" value="5">
+                </div>
+                <div class="custom-setting">
+                    <label for="total-questions">题目总数（10-50题）：</label>
+                    <input type="number" id="total-questions" min="10" max="50" value="20">
+                </div>
+                <div class="custom-setting">
+                    <label for="error-penalty">错误惩罚：</label>
+                    <select id="error-penalty">
+                        <option value="no">只提示不扣分</option>
+                        <option value="yes">扣分</option>
+                    </select>
+                </div>
+                <button id="start-custom-btn" class="start-btn">开始游戏</button>
+            </div>
+            <button id="back-btn" class="back-btn">返回</button>
+        </div>
+        <div id="game-screen" class="game-screen" style="display: none;">
+            <div class="rule-indicator" id="rule-indicator" style="display: none;">
+                <div class="rule-icon" id="rule-icon"></div>
+                <div class="rule-text" id="rule-text"></div>
+            </div>
+            <div class="game-info">
+                <div class="score">得分: <span id="score">0</span></div>
+                <div class="timer-container">
+                    <div id="timer-bar" class="timer-bar" style="width: 100%">
+                        <div id="timer-character" class="timer-character">🐶</div>
+                    </div>
+                </div>
+            </div>
+            <div id="word" class="word"></div>
+            <div id="feedback" class="feedback"></div>
+            <div class="buttons-container">
+                <button id="btn1" class="color-btn"></button>
+                <button id="btn2" class="color-btn"></button>
+                <button id="btn3" class="color-btn"></button>
+                <button id="btn4" class="color-btn"></button>
+                <button id="btn5" class="color-btn"></button>
+                <button id="btn6" class="color-btn"></button>
+            </div>
+            <div class="dual-task-counter" id="dual-task-counter" style="display: none;">
+                红色按钮出现次数: <span id="red-button-count">0</span>
+            </div>
+            <div class="encouragement">每天玩几分钟，大脑更灵活</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
