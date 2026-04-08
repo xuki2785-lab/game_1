@@ -1,99 +1,70 @@
-// 颜色单词和对应的颜色值
+// 颜色单词和对应的颜色值 - 标准中文色卡
 const colorWords = {
-    // 红色系
-    "红色": "#FF0000",
-    "深红": "#8B0000",
-    "粉红": "#FFC0CB",
-    "玫红": "#FF69B4",
-    "砖红": "#B22222",
-    "橙红": "#FF4500",
-    "浅红": "#FF6347",
-    "酒红": "#722F37",
-    "朱红": "#DC143C",
-    "海棠红": "#FF6B6B",
-    
-    // 蓝色系
-    "蓝色": "#0000FF",
-    "深蓝": "#00008B",
-    "浅蓝": "#87CEEB",
-    "湖蓝": "#00BFFF",
-    "天蓝": "#87CEEB",
-    "海蓝": "#0066CC",
-    "钴蓝": "#0047AB",
-    "靛蓝": "#4B0082",
-    "宝蓝": "#0000CD",
-    "孔雀蓝": "#008080",
-    
-    // 黄色系
-    "黄色": "#FFFF00",
-    "金黄": "#FFD700",
-    "柠檬黄": "#FFFFE0",
-    "土黄": "#D2B48C",
-    "橙黄": "#FFA500",
-    "米黄": "#F5DEB3",
-    "姜黄": "#DAA520",
-    "暗黄": "#9E9E20",
-    "浅黄": "#FFFFE0",
-    "杏黄": "#FBB917",
-    
-    // 绿色系
-    "绿色": "#00FF00",
-    "深绿": "#006400",
-    "浅绿": "#90EE90",
-    "草绿": "#32CD32",
-    "橄榄绿": "#808000",
-    "墨绿": "#006400",
-    "翠绿": "#00FF7F",
-    "黄绿": "#9ACD32",
-    "蓝绿": "#20B2AA",
-    "森林绿": "#228B22",
-    
-    // 紫色系
-    "紫色": "#800080",
-    "深紫": "#4B0082",
-    "浅紫": "#E6E6FA",
-    "紫罗兰": "#EE82EE",
-    "薰衣草紫": "#9370DB",
-    "葡萄紫": "#663399",
-    "藕荷紫": "#D8BFD8",
-    "木槿紫": "#8A2BE2",
-    "紫蓝": "#8A2BE2",
-    "紫粉": "#CBC3E3",
-    
-    // 橙色系
-    "橙色": "#FFA500",
-    "深橙": "#FF8C00",
-    "浅橙": "#FFB347",
-    "橙红": "#FF4500",
-    "橙黄": "#FFD700",
-    "琥珀橙": "#FFBF00",
-    "珊瑚橙": "#FF7F50",
-    "杏子橙": "#E6A23C",
-    "南瓜橙": "#FF6600",
-    "甜橙": "#FF9900",
-    
-    // 其他颜色
-    "黑色": "#000000",
-    "白色": "#FFFFFF",
-    "灰色": "#808080",
-    "浅灰": "#D3D3D3",
-    "深灰": "#696969",
-    "棕色": "#A52A2A",
-    "深棕": "#8B4513",
-    "浅棕": "#D2B48C",
-    "金色": "#FFD700",
-    "银色": "#C0C0C0",
-    "青色": "#00FFFF",
-    "藏青色": "#000080",
-    "珊瑚色": "#FF7F50",
-    "米色": "#F5F5DC",
+    // 第一行
+    "嫩黄": "#FFE500",
+    "胭脂红": "#C2185B",
+    "琥珀": "#FF8F00",
     "象牙白": "#FFFFF0",
-    "亚麻色": "#FAF0E6",
-    "驼色": "#D2B48C",
-    "卡其色": "#F0DC82",
-    "豆沙色": "#CD9575",
-    "砖色": "#CD5C5C",
-    "巧克力色": "#D2691E"
+    "柳黄色": "#E6CE36",
+    "朱红色": "#E53935",
+    "桔色": "#FF7043",
+    "白雪色": "#FAFAFA",
+    "莺黄色": "#FFF59D",
+    "妃红色": "#D81B60",
+    "橙色": "#FF9800",
+    "月白": "#F0F8FF",
+    "绿色": "#4CAF50",
+    "褐色": "#8D6E63",
+    "秋香色": "#D4AF37",
+    "素白色": "#F5F5F5",
+    "湖蓝色": "#4FC3F7",
+    "棕色": "#795548",
+    "金色": "#FFD700",
+    "盘色": "#F5F5F5",
+    "明黄色": "#FFEB3B",
+    "橙色": "#FF9800",
+    "浅蓝色": "#2196F3",
+    "牙色": "#FFE0B2",
+    "鸦青色": "#455A64",
+    "橄榄色": "#8D6E63",
+    "靛青色": "#1A237E",
+    "铂色": "#E5E4E2",
+    "铜绿色": "#00C853",
+    "桔红色": "#FF6F00",
+    "湖蓝色": "#4FC3F7",
+    "玄色": "#424242",
+    "豆绿色": "#A5D6A7",
+    "橘黄色": "#FFAB40",
+    "蓝灰色": "#90A4AE",
+    "乌云": "#455A64",
+    "松绿色": "#4CAF50",
+    "橘红色": "#FF6F00",
+    "藏蓝色": "#0D47A1",
+    "墨黑": "#212121",
+    "松花色": "#F0F4C3",
+    "黄色": "#FFEB3B",
+    "藏青色": "#0D47A1",
+    "墨绿": "#2E7D32",
+    "妃色": "#D81B60",
+    "驼色": "#8D6E63",
+    "紫色": "#7B1FA2",
+    "黑灰色": "#616161",
+    "品红色": "#E91E63",
+    "棕色": "#795548",
+    "雪青色": "#673AB7",
+    "黝色": "#424242",
+    "海棠红": "#E53935",
+    "褐色": "#8D6E63",
+    "青莲": "#673AB7",
+    "黧色": "#424242",
+    "石榴红": "#C62828",
+    "棕色": "#795548",
+    "雪青": "#64B5F6",
+    "苍色": "#90A4AE",
+    "大红色": "#F44336",
+    "棕褐色": "#5D4037",
+    "藕荷色": "#E1BEE7",
+    "老色": "#90A4AE"
 };
 
 // 所有颜色单词
@@ -223,10 +194,10 @@ const commonWords = ["苹果", "香蕉", "猫咪", "狗狗", "太阳", "月亮",
 // 不同难度的颜色集
 const colorSets = {
     easy: {
-        colors: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00"]
+        colors: ["#F44336", "#4CAF50", "#2196F3", "#FFEB3B"] // 大红色, 绿色, 浅蓝色, 黄色
     },
     medium: {
-        colors: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FFA500", "#800080", "#000000", "#FFFFFF", "#FFC0CB", "#00FFFF", "#A52A2A", "#808080", "#FFD700", "#C0C0C0", "#808000", "#000080", "#FF69B4", "#00BFFF", "#FF7F50", "#EE82EE"]
+        colors: ["#F44336", "#4CAF50", "#2196F3", "#FFEB3B", "#FF9800", "#7B1FA2", "#424242", "#FAFAFA", "#E91E63", "#4FC3F7", "#795548", "#90A4AE", "#FFD700", "#E5E4E2", "#8D6E63", "#0D47A1", "#C2185B", "#00C853", "#FF6F00", "#673AB7"]
     },
     hard: {
         colors: Object.values(colorWords) // 使用所有颜色值
@@ -234,6 +205,17 @@ const colorSets = {
 };
 // 当前使用的颜色集
 let currentColorSet = colorSets.medium;
+
+// 确保页面刷新时游戏状态正确重置
+window.addEventListener('load', function() {
+    // 重置游戏设置
+    resetGameSettings();
+    // 确保初始界面正确显示
+    startScreen.style.display = 'block';
+    difficultyScreen.style.display = 'none';
+    gameScreen.style.display = 'none';
+    customOptions.style.display = 'none';
+});
 
 // 初始化游戏
 function initGame() {
@@ -269,9 +251,6 @@ function initGame() {
     // 打乱按钮颜色顺序
     buttonColors.sort(() => Math.random() - 0.5);
     
-    // 2%概率生成无正确答案的题目
-    const hasCorrectAnswer = Math.random() > 0.02;
-    
     // 生成题目文字和颜色
     let randomWord;
     if (gameSettings.difficulty === 'hard') {
@@ -279,44 +258,27 @@ function initGame() {
         // 获取按钮颜色名称
         let buttonColorNames = buttonColors.map(color => getColorName(color));
         
-        if (hasCorrectAnswer) {
-            // 有正确答案：从按钮颜色中选择
-            correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
-            
-            // 确保文字和颜色不相同：选择一个与颜色不同的颜色词
-            let availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
-            // 如果过滤后没有可用词汇，则重新生成按钮直到有可用词汇
-            while (availableWords.length === 0) {
-                // 重新生成一组按钮
-                buttonColors.length = 0;
-                while (buttonColors.length < buttonCount) {
-                    const randomColor = currentColorSet.colors[Math.floor(Math.random() * currentColorSet.colors.length)];
-                    if (!buttonColors.includes(randomColor)) {
-                        buttonColors.push(randomColor);
-                    }
+        // 有正确答案：从按钮颜色中选择
+        correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+        
+        // 确保文字和颜色不相同：选择一个与颜色不同的颜色词
+        let availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
+        // 如果过滤后没有可用词汇，则重新生成按钮直到有可用词汇
+        while (availableWords.length === 0) {
+            // 重新生成一组按钮
+            buttonColors.length = 0;
+            while (buttonColors.length < buttonCount) {
+                const randomColor = currentColorSet.colors[Math.floor(Math.random() * currentColorSet.colors.length)];
+                if (!buttonColors.includes(randomColor)) {
+                    buttonColors.push(randomColor);
                 }
-                buttonColors.sort(() => Math.random() - 0.5);
-                buttonColorNames = buttonColors.map(color => getColorName(color));
-                correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
-                availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
             }
-            randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
-        } else {
-            // 无正确答案：从所有颜色词中选择一个，确保不在按钮中
-            const allColorNames = Object.keys(colorWords);
-            let availableWords = allColorNames.filter(name => !buttonColorNames.includes(name));
-            if (availableWords.length === 0) {
-                availableWords = allColorNames;
-            }
-            randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
-            // 选择一个不在按钮中的颜色
-            const allColors = Object.values(colorWords);
-            let availableColors = allColors.filter(color => !buttonColors.includes(color));
-            if (availableColors.length === 0) {
-                availableColors = allColors;
-            }
-            correctColor = availableColors[Math.floor(Math.random() * availableColors.length)];
+            buttonColors.sort(() => Math.random() - 0.5);
+            buttonColorNames = buttonColors.map(color => getColorName(color));
+            correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+            availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
         }
+        randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
     } else {
         // 普通模式：随机选择文本（普通词汇或中性词）
         // 20%概率出现中性词
@@ -334,18 +296,8 @@ function initGame() {
             wordElement.style.fontWeight = 'normal';
         }
         
-        if (hasCorrectAnswer) {
-            // 有正确答案：从按钮颜色中选择
-            correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
-        } else {
-            // 无正确答案：从所有颜色中选择一个不在按钮中的颜色
-            const allColors = Object.values(colorWords);
-            let availableColors = allColors.filter(color => !buttonColors.includes(color));
-            if (availableColors.length === 0) {
-                availableColors = allColors;
-            }
-            correctColor = availableColors[Math.floor(Math.random() * availableColors.length)];
-        }
+        // 有正确答案：从按钮颜色中选择
+        correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
     }
     
     // 设置文本和颜色
@@ -604,63 +556,33 @@ function checkAnswer(selectedColor) {
         }, 300);
     } else {
         // 错误答案
-        // 检查是否是无正确答案的题目
-        const isNoCorrectAnswer = !buttonColors.includes(correctColor);
+        // 正确答案是文字显示的颜色
+        const correctAnswerText = getColorName(correctColor);
         
-        if (isNoCorrectAnswer) {
-            // 无正确答案的题目：用户点击任何按钮都正确
-            feedbackElement.textContent = '正确！（无正确答案）';
-            feedbackElement.className = 'feedback correct';
-            // 播放正确答案音效
-            playCorrectSound();
-            // 增加分数
+        feedbackElement.textContent = `错误！正确答案是：${correctAnswerText}`;
+        feedbackElement.className = 'feedback incorrect';
+        // 播放错误答案音效
+        playErrorSound();
+        // 如果开启了错误惩罚，减少分数
+        if (gameSettings.errorPenalty) {
             if (gameSettings.difficulty === 'hard') {
-                // 困难模式+15分
-                gameSettings.score += 15;
+                // 困难模式-10分
+                gameSettings.score = Math.max(0, gameSettings.score - 10);
             } else if (gameSettings.difficulty === 'medium') {
-                // 中等模式+10分
-                gameSettings.score += 10;
+                // 中等模式-5分
+                gameSettings.score = Math.max(0, gameSettings.score - 5);
             } else {
-                // 简单模式+1分
-                gameSettings.score++;
+                // 简单模式-1分
+                gameSettings.score = Math.max(0, gameSettings.score - 1);
             }
             // 更新得分显示
             scoreElement.textContent = gameSettings.score;
-            // 屏幕边缘闪烁（正确闪淡绿）
-            document.body.style.boxShadow = 'inset 0 0 50px rgba(76, 175, 80, 0.5)';
-            setTimeout(() => {
-                document.body.style.boxShadow = 'none';
-            }, 300);
-        } else {
-            // 有正确答案但答错了
-            // 正确答案是文字显示的颜色
-            const correctAnswerText = getColorName(correctColor);
-            
-            feedbackElement.textContent = `错误！正确答案是：${correctAnswerText}`;
-            feedbackElement.className = 'feedback incorrect';
-            // 播放错误答案音效
-            playErrorSound();
-            // 如果开启了错误惩罚，减少分数
-            if (gameSettings.errorPenalty) {
-                if (gameSettings.difficulty === 'hard') {
-                    // 困难模式-10分
-                    gameSettings.score = Math.max(0, gameSettings.score - 10);
-                } else if (gameSettings.difficulty === 'medium') {
-                    // 中等模式-5分
-                    gameSettings.score = Math.max(0, gameSettings.score - 5);
-                } else {
-                    // 简单模式-1分
-                    gameSettings.score = Math.max(0, gameSettings.score - 1);
-                }
-                // 更新得分显示
-                scoreElement.textContent = gameSettings.score;
-            }
-            // 屏幕边缘闪烁（错误闪淡橙）
-            document.body.style.boxShadow = 'inset 0 0 50px rgba(255, 152, 0, 0.5)';
-            setTimeout(() => {
-                document.body.style.boxShadow = 'none';
-            }, 300);
         }
+        // 屏幕边缘闪烁（错误闪淡橙）
+        document.body.style.boxShadow = 'inset 0 0 50px rgba(255, 152, 0, 0.5)';
+        setTimeout(() => {
+            document.body.style.boxShadow = 'none';
+        }, 300);
     }
     
     // 增加当前题目数
