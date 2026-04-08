@@ -152,6 +152,7 @@ const wordElement = document.getElementById('word');
 const feedbackElement = document.getElementById('feedback');
 const scoreElement = document.getElementById('score');
 const questionProgressElement = document.getElementById('question-progress');
+const progressBarElement = document.getElementById('progress-bar');
 const timerBarElement = document.getElementById('timer-bar');
 const timerCharacterElement = document.getElementById('timer-character');
 const ruleIndicator = document.getElementById('rule-indicator');
@@ -228,6 +229,9 @@ function initGame() {
     
     // 更新题目进度显示
     questionProgressElement.textContent = `${gameSettings.currentQuestion + 1}/${gameSettings.totalQuestions}`;
+    // 更新进度条
+    const progressPercentage = (gameSettings.currentQuestion / gameSettings.totalQuestions) * 100;
+    progressBarElement.style.width = `${progressPercentage}%`;
     
     // 清除之前的倒计时
     clearInterval(countdown);
@@ -392,6 +396,8 @@ function askDualTaskQuestion() {
 // 游戏结束
 function endGame() {
     clearInterval(countdown);
+    // 设置进度条为100%
+    progressBarElement.style.width = '100%';
     wordElement.textContent = `游戏结束！`;
     wordElement.style.color = '#333333';
     feedbackElement.textContent = `得分：${gameSettings.score}/${gameSettings.totalQuestions}`;
