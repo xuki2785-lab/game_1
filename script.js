@@ -492,7 +492,8 @@ function startCountdown() {
             timerBarElement.style.width = '0%';
             timerBarElement.setAttribute('data-age', 'old');
             
-            feedbackElement.textContent = '时间到！';
+            const correctAnswerText = getColorName(correctColor);
+            feedbackElement.textContent = `时间到！正确答案是：${correctAnswerText}`;
             feedbackElement.className = 'feedback incorrect';
             // 屏幕边缘闪烁（错误闪淡橙）
             document.body.style.boxShadow = 'inset 0 0 50px rgba(255, 152, 0, 0.5)';
@@ -645,7 +646,7 @@ easyBtn.addEventListener('click', function() {
     playClickSound();
     // 设置游戏设置
     gameSettings.difficulty = 'easy';
-    gameSettings.totalQuestions = 20;
+    gameSettings.totalQuestions = 15;
     gameSettings.currentQuestion = 0;
     gameSettings.score = 0;
     gameSettings.errorPenalty = false;
@@ -687,7 +688,7 @@ hardBtn.addEventListener('click', function() {
     playClickSound();
     // 设置游戏设置
     gameSettings.difficulty = 'hard';
-    gameSettings.totalQuestions = 20;
+    gameSettings.totalQuestions = 25;
     gameSettings.currentQuestion = 0;
     gameSettings.score = 0;
     gameSettings.errorPenalty = true; // 启用错误惩罚
