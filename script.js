@@ -236,6 +236,12 @@ function initGame() {
     // 清除之前的倒计时
     clearInterval(countdown);
     
+    // 移除可能存在的下一题按钮
+    const existingNextBtn = gameScreen.querySelector('.next-question-btn');
+    if (existingNextBtn) {
+        existingNextBtn.remove();
+    }
+    
     // 初始化倒计时条和小狗
     timerBarElement.style.width = '100%';
     timerBarElement.setAttribute('data-age', 'young');
