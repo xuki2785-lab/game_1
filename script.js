@@ -529,8 +529,38 @@ function startCountdown() {
             }
             // 增加当前题目数
             gameSettings.currentQuestion++;
-            // 延迟1秒后进入下一题
-            setTimeout(initGame, 1000);
+            
+            // 移除已有的下一题按钮（如果存在）
+            const existingNextBtn = gameScreen.querySelector('.next-question-btn');
+            if (existingNextBtn) {
+                existingNextBtn.remove();
+            }
+            
+            // 创建下一题按钮
+            const nextQuestionBtn = document.createElement('button');
+            nextQuestionBtn.textContent = '下一题';
+            nextQuestionBtn.className = 'start-btn next-question-btn';
+            nextQuestionBtn.style.marginTop = '20px';
+            nextQuestionBtn.onclick = function() {
+                // 播放按钮点击音效
+                playClickSound();
+                // 移除下一题按钮
+                nextQuestionBtn.remove();
+                // 进入下一题
+                initGame();
+            };
+            
+            // 添加下一题按钮到游戏界面
+            gameScreen.appendChild(nextQuestionBtn);
+            
+            // 时间到时，3秒后自动跳转
+            setTimeout(() => {
+                // 检查按钮是否存在，避免重复移除
+                if (gameScreen.contains(nextQuestionBtn)) {
+                    nextQuestionBtn.remove();
+                    initGame();
+                }
+            }, 3000);
         }
     }, 50); // 增加更新频率，使动画更平滑
 }
@@ -601,8 +631,49 @@ function checkAnswer(selectedColor) {
     // 增加当前题目数
     gameSettings.currentQuestion++;
     
-    // 延迟1秒后进入下一题
-    setTimeout(initGame, 1000);
+    // 移除已有的下一题按钮（如果存在）
+    const existingNextBtn = gameScreen.querySelector('.next-question-btn');
+    if (existingNextBtn) {
+        existingNextBtn.remove();
+    }
+    
+    // 创建下一题按钮
+    const nextQuestionBtn = document.createElement('button');
+    nextQuestionBtn.textContent = '下一题';
+    nextQuestionBtn.className = 'start-btn next-question-btn';
+    nextQuestionBtn.style.marginTop = '20px';
+    nextQuestionBtn.onclick = function() {
+        // 播放按钮点击音效
+        playClickSound();
+        // 移除下一题按钮
+        nextQuestionBtn.remove();
+        // 进入下一题
+        initGame();
+    };
+    
+    // 添加下一题按钮到游戏界面
+    gameScreen.appendChild(nextQuestionBtn);
+    
+    // 根据答题结果设置自动跳转时间
+    if (isCorrect) {
+        // 答对时，2秒后自动跳转
+        setTimeout(() => {
+            // 检查按钮是否存在，避免重复移除
+            if (gameScreen.contains(nextQuestionBtn)) {
+                nextQuestionBtn.remove();
+                initGame();
+            }
+        }, 2000);
+    } else {
+        // 答错时，3秒后自动跳转
+        setTimeout(() => {
+            // 检查按钮是否存在，避免重复移除
+            if (gameScreen.contains(nextQuestionBtn)) {
+                nextQuestionBtn.remove();
+                initGame();
+            }
+        }, 3000);
+    }
 }
 
 // 判断颜色是否为浅色（用于设置按钮文字颜色）
