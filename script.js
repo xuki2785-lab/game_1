@@ -151,6 +151,7 @@ const errorPenaltySelect = document.getElementById('error-penalty');
 const wordElement = document.getElementById('word');
 const feedbackElement = document.getElementById('feedback');
 const scoreElement = document.getElementById('score');
+const questionProgressElement = document.getElementById('question-progress');
 const timerBarElement = document.getElementById('timer-bar');
 const timerCharacterElement = document.getElementById('timer-character');
 const ruleIndicator = document.getElementById('rule-indicator');
@@ -224,6 +225,9 @@ function initGame() {
         endGame();
         return;
     }
+    
+    // 更新题目进度显示
+    questionProgressElement.textContent = `${gameSettings.currentQuestion + 1}/${gameSettings.totalQuestions}`;
     
     // 清除之前的倒计时
     clearInterval(countdown);
@@ -654,6 +658,8 @@ easyBtn.addEventListener('click', function() {
     countdownTime = 5;
     // 设置颜色集
     currentColorSet = colorSets.easy;
+    // 初始化题目进度显示
+    questionProgressElement.textContent = `0/${gameSettings.totalQuestions}`;
     // 隐藏难度选择界面，显示游戏界面
     difficultyScreen.style.display = 'none';
     gameScreen.style.display = 'block';
@@ -675,6 +681,8 @@ mediumBtn.addEventListener('click', function() {
     countdownTime = 3.5;
     // 设置颜色集
     currentColorSet = colorSets.medium;
+    // 初始化题目进度显示
+    questionProgressElement.textContent = `0/${gameSettings.totalQuestions}`;
     // 隐藏难度选择界面，显示游戏界面
     difficultyScreen.style.display = 'none';
     gameScreen.style.display = 'block';
@@ -703,6 +711,8 @@ hardBtn.addEventListener('click', function() {
     questionsSinceLastDualTask = 0;
     // 隐藏双重任务计数器
     dualTaskCounter.style.display = 'none';
+    // 初始化题目进度显示
+    questionProgressElement.textContent = `0/${gameSettings.totalQuestions}`;
     // 隐藏难度选择界面，显示游戏界面
     difficultyScreen.style.display = 'none';
     gameScreen.style.display = 'block';
@@ -732,6 +742,8 @@ startCustomBtn.addEventListener('click', function() {
     countdownTime = parseInt(countdownTimeInput.value);
     // 设置颜色集（使用困难模式的颜色集）
     currentColorSet = colorSets.hard;
+    // 初始化题目进度显示
+    questionProgressElement.textContent = `0/${gameSettings.totalQuestions}`;
     // 隐藏难度选择界面，显示游戏界面
     difficultyScreen.style.display = 'none';
     gameScreen.style.display = 'block';
