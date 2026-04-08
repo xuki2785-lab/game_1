@@ -400,7 +400,9 @@ function endGame() {
     progressBarElement.style.width = '100%';
     wordElement.textContent = `游戏结束！`;
     wordElement.style.color = '#333333';
-    feedbackElement.textContent = `得分：${gameSettings.score}/${gameSettings.totalQuestions}`;
+    // 计算正确率
+    const correctRate = Math.round((gameSettings.score / gameSettings.totalQuestions) * 100);
+    feedbackElement.textContent = `得分：${gameSettings.score}/${gameSettings.totalQuestions}，正确率：${correctRate}%`;
     feedbackElement.className = 'feedback';
     
     // 禁用按钮
@@ -656,7 +658,7 @@ easyBtn.addEventListener('click', function() {
     playClickSound();
     // 设置游戏设置
     gameSettings.difficulty = 'easy';
-    gameSettings.totalQuestions = 15;
+    gameSettings.totalQuestions = 10;
     gameSettings.currentQuestion = 0;
     gameSettings.score = 0;
     gameSettings.errorPenalty = false;
@@ -702,7 +704,7 @@ hardBtn.addEventListener('click', function() {
     playClickSound();
     // 设置游戏设置
     gameSettings.difficulty = 'hard';
-    gameSettings.totalQuestions = 25;
+    gameSettings.totalQuestions = 30;
     gameSettings.currentQuestion = 0;
     gameSettings.score = 0;
     gameSettings.errorPenalty = true; // 启用错误惩罚
