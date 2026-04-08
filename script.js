@@ -182,6 +182,9 @@ let dualTaskEnabled = false;
 let questionsSinceLastDualTask = 0;
 let matchQuestionCounter = 0; // 计数器，用于控制颜色与文字匹配的频率
 
+// 已使用的字体颜色集合
+let usedTextColors = [];
+
 // 游戏设置
 let gameSettings = {
     difficulty: 'medium',
@@ -265,6 +268,17 @@ function initGame() {
     // 打乱按钮颜色顺序
     buttonColors.sort(() => Math.random() - 0.5);
     
+    // 获取当前难度可用的颜色池
+    const availableColors = [...currentColorSet.colors];
+    
+    // 如果已使用颜色数量达到颜色池大小，重置已使用颜色集合
+    if (usedTextColors.length >= availableColors.length) {
+        usedTextColors = [];
+    }
+    
+    // 从可用颜色中选择一个未使用过的颜色作为字体颜色
+    const unusedColors = availableColors.filter(color => !usedTextColors.includes(color));
+    
     // 生成题目文字和颜色
     let randomWord;
     if (gameSettings.difficulty === 'hard') {
@@ -272,8 +286,15 @@ function initGame() {
         // 获取按钮颜色名称
         let buttonColorNames = buttonColors.map(color => getColorName(color));
         
-        // 有正确答案：从按钮颜色中选择
-        correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+        // 有正确答案：从未使用的颜色中选择，确保字体颜色不重复
+        if (unusedColors.length > 0) {
+            correctColor = unusedColors[Math.floor(Math.random() * unusedColors.length)];
+        } else {
+            correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+        }
+        
+        // 记录使用的字体颜色
+        usedTextColors.push(correctColor);
         
         // 确保文字和颜色不相同：选择一个与颜色不同的颜色词
         let availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
@@ -289,7 +310,15 @@ function initGame() {
             }
             buttonColors.sort(() => Math.random() - 0.5);
             buttonColorNames = buttonColors.map(color => getColorName(color));
-            correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+            
+            // 重新选择字体颜色
+            if (unusedColors.length > 0) {
+                correctColor = unusedColors[Math.floor(Math.random() * unusedColors.length)];
+            } else {
+                correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+            }
+            usedTextColors.push(correctColor);
+            
             availableWords = buttonColorNames.filter(name => getColorName(correctColor) !== name);
         }
         randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
@@ -310,8 +339,15 @@ function initGame() {
             wordElement.style.fontWeight = 'normal';
         }
         
-        // 有正确答案：从按钮颜色中选择
-        correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+        // 有正确答案：从未使用的颜色中选择，确保字体颜色不重复
+        if (unusedColors.length > 0) {
+            correctColor = unusedColors[Math.floor(Math.random() * unusedColors.length)];
+        } else {
+            correctColor = buttonColors[Math.floor(Math.random() * buttonColors.length)];
+        }
+        
+        // 记录使用的字体颜色
+        usedTextColors.push(correctColor);
     }
     
     // 设置文本和颜色
@@ -455,6 +491,9 @@ function resetGameSettings() {
     };
     currentColorSet = colorSets.medium;
     countdownTime = 10;
+    
+    // 重置已使用的字体颜色集合
+    usedTextColors = [];
     
     // 重置得分显示
     if (scoreElement) {
@@ -733,6 +772,8 @@ backBtn.addEventListener('click', function() {
 easyBtn.addEventListener('click', function() {
     // 播放按钮点击音效
     playClickSound();
+    // 重置已使用的字体颜色集合
+    usedTextColors = [];
     // 设置游戏设置
     gameSettings.difficulty = 'easy';
     gameSettings.totalQuestions = 10;
@@ -756,6 +797,8 @@ easyBtn.addEventListener('click', function() {
 mediumBtn.addEventListener('click', function() {
     // 播放按钮点击音效
     playClickSound();
+    // 重置已使用的字体颜色集合
+    usedTextColors = [];
     // 设置游戏设置
     gameSettings.difficulty = 'medium';
     gameSettings.totalQuestions = 20;
@@ -779,6 +822,8 @@ mediumBtn.addEventListener('click', function() {
 hardBtn.addEventListener('click', function() {
     // 播放按钮点击音效
     playClickSound();
+    // 重置已使用的字体颜色集合
+    usedTextColors = [];
     // 设置游戏设置
     gameSettings.difficulty = 'hard';
     gameSettings.totalQuestions = 30;
@@ -817,6 +862,8 @@ customBtn.addEventListener('click', function() {
 startCustomBtn.addEventListener('click', function() {
     // 播放按钮点击音效
     playClickSound();
+    // 重置已使用的字体颜色集合
+    usedTextColors = [];
     // 设置游戏设置
     gameSettings.difficulty = 'custom';
     gameSettings.totalQuestions = parseInt(totalQuestionsInput.value);
